@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Nido Escape</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #3a3a3a;
+  background: #fdfaf6;
+  line-height: 1.8;
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+nav a { text-decoration: none; color: #333; margin-left: 15px; font-weight: 500; }
+
+/* HERO */
+header {
+  height: 90vh;
+  background: url("images/big-lagoon.jpg") center/cover no-repeat;
+}
+header .overlay {
+  background: rgba(0,0,0,0.5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+header p {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+}
+.btn {
+  background: #00bfa6;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+
+/* SECTIONS */
+section { padding: 80px 20px; max-width: 1100px; margin: auto; }
+h2 { text-align: center; margin-bottom: 30px; color: #00796b; font-size: 2.2rem; }
+
+/* TOUR CARDS */
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.card h3 { margin-bottom: 5px; color: #00bfa6; }
+.card p { font-size: 0.95rem; margin-bottom: 10px; }
+
+/* IMAGE GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+.gallery img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 15px;
+}
+
+/* BOOKING */
+.booking-box {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.booking-box input, .booking-box select, .booking-box button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+.booking-box button {
+  background: #00bfa6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.booking-box button:hover { background: #00796b; }
+
+/* CONTACT */
+#contact { background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 50px 20px; text-align: center; }
+
+/* FOOTER */
+footer { background: #222; color: #ccc; text-align: center; padding: 25px; }
+
+/* COLLAPSIBLE TOUR CATEGORIES */
+.category-toggle {
+  width: 100%;
+  background: #00bfa6;
+  color: white;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: left;
+  transition: 0.3s;
+}
+.category-toggle:hover { background: #00796b; }
+.category-content { display: none; margin-bottom: 30px; }
+
+.logo { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.2rem; color: #4e9c89; }
+.logo img { height: 40px; width: auto; border-radius: 8px; }
+
+.grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.12);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .card h3 {
+      color: #00796b;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+
+</style>
+</head>
+
+<script>
+const tourSelect = document.getElementById("tour");
+const qtyInput = document.getElementById("quantity");
+const totalDisplay = document.getElementById("total-price");
+
+function updateTotal() {
+  const price = parseInt(tourSelect.value) || 0;
+  const qty = parseInt(qtyInput.value) || 0;
+  const total = price * qty;
+
+  totalDisplay.textContent = "₱" + total.toLocaleString("en-PH");
+}
+
+tourSelect.addEventListener("change", updateTotal);
+qtyInput.addEventListener("input", updateTotal);
+</script>
+
+
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById("lightbox").style.display = "flex";
+  document.getElementById("lightbox-img").src = src;
+}
+function closeLightbox() { document.getElementById("lightbox").style.display = "none"; }
+</script>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <img src="images/logo.png" alt="El Nido Escape Logo">
+    <span>El Nido Escape</span>
+  </div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#tours">Tours</a>
+    <a href="#booking">Booking</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="overlay">
+    <h1>Explore El Nido With Us</h1>
+    <p>Your Escape to Paradise Begins Here</p>
+    <a href="#booking" class="btn">Book Now</a>
+  </div>
+</header>
+
+<section class>
+    <h2 class="title">How to Get to El Nido</h2>
+    <p class="subtitle">Choose the best way to reach paradise. Whether by air or land, your unforgettable island adventure starts here.</p>
+
+ <div class="grid">
+
+<!-- BY AIR -->
+      <div class="card">
+       <img src="images/by-air.jpg" alt="Flight to El Nido">
+        <div class="card-content">
+          <h3> By Air from Manila</h3>
+          <p>
+            Fly directly from Manila to El Nido for the fastest and most comfortable journey.
+            Multiple airlines operate daily flights, allowing you to reach paradise in just over an hour.
+          </p>
+        </div>
+      </div>
+
+      <!-- BY LAND -->
+      <div class="card">
+        <img src="images/by-land.jpg" alt="Van transfer to El Nido">
+        <div class="card-content">
+          <h3> By Land from Puerto Princesa</h3>
+          <p>
+            Enjoy a scenic 5–6 hour van ride through Palawan’s lush landscapes.
+            Comfortable shared or private transfers are available daily to bring you safely to El Nido.
+          </p>
+        </div>
+      </div>
+
+      <!-- TRAVEL TIPS -->
+      <div class="card">
+        <img src="images/travel-tips.jpg" alt="El Nido lagoon">
+        <div class="card-content">
+          <h3> Travel Tips</h3>
+          <p>
+            Bring cash, reef‑safe sunscreen, and waterproof bags.
+            Book tours in advance during peak season to secure your dream island hopping experience.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <p style="text-align:center; max-width:700px; margin:auto;">
+    El Nido Escape is your complete online travel companion dedicated to the town of El Nido and its surrounding destinations in Palawan. We help travelers explore, discover, and book unforgettable experiences—from island hopping tours and boat expeditions to van transfers and local adventures.
+
+Whether you’re planning a short vacation or a multi-day adventure, our platform makes it easy to organize your perfect stay. We also provide helpful travel guides, tips, and personalized assistance to ensure a smooth and memorable journey.
+  </p>
+</section>
+
+<section id="tours">
+  <h2>We Offer You</h2>
+<!-- COLLAPSIBLE CATEGORIES -->
+  <div class="category-section">
+
+    <!-- REGULAR TOURS -->
+    <button class="category-toggle">Regular Tours <span class="arrow">▼</span></button>
+    <div class="category-content">
+      <div class="services">
+
+        <!-- TOUR A -->
+        <div class="card">
+          <h3>Tour A</h3>
+          <p>Big Lagoon • 7 Commando • Secret Lagoon • Shimizu Island • Payong Payong Island</p>
+          <p><strong>Details:</strong> LAGOON ACTIVITY.
+Explore the iconic lagoons and islands of El Nido. Snorkel, swim, and enjoy the pristine beaches.</p>
+          <p><strong>Price:</strong> Starts at ₱1,200 per person</p>
+
+          <div class="gallery">
+            <img src="images/big-lagoon.jpg" alt="Big Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/7-commando.jpg" alt="7 Commando" onclick="openLightbox(this.src)">
+            <img src="images/secret-lagoon.jpg" alt="Secret Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/shimizu-island.jpg" alt="Shimizu Island" onclick="openLightbox(this.src)">
+            <img src="images/payong-payong-beach.jpg" alt="Payong Payong Island" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+        <!-- TOUR B -->
+        <div class="card">
+          <h3>Tour B</h3>
+          <p>Snake Island • Cudugnon Cave • Entalula Beach • Papaya Beach • Cathedral Cave</p>
+          <p><strong>Details:</strong> CAVE & OVERLOOKING. Discover hidden caves, white sand beaches, and famous islands ideal for relaxation and photography.</p>
+          <p><strong>Price:</strong> Starts at ₱1,300 per person</p>
+
+          <div class="gallery">
+            <img src="images/snake-island.jpg" alt="Snake Island" onclick="openLightbox(this.src)">
+            <img src="images/cudugnon-cave.jpg" alt="Cudugnon Cave" onclick="openLightbox(this.src)">
+            <img src="images/entalula-beach.jpg" alt="Entalula Beach" onclick="openLightbox(this.src)">
+            <img src="images/papaya-beach.jpg" alt="Papaya Beach" onclick="openLightbox(this.src)">
+            <img src="images/cathedral-cave.jpg" alt="Cathedral Cave" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+        <!-- TOUR C -->
+        <div class="card">
+          <h3>Tour C</h3>
+          <p>Hidden Beach • Matinloc Shrine • Secret Beach • Talisay Beach • Star Beach</p>
+          <p><strong>Details:</strong> SNORKLING ACTIVITY. Perfect for adventure seekers. Visit secret beaches, historic shrines, and quiet lagoons away from the crowds.</p>
+          <p><strong>Price:</strong> Starts at ₱1,400 per person</p>
+
+          <div class="gallery">
+            <img src="images/hidden-beach.jpg" alt="Hidden Beach" onclick="openLightbox(this.src)">
+            <img src="images/matinloc-shrine.jpg" alt="Matinloc Shrine" onclick="openLightbox(this.src)">
+            <img src="images/secret-beach.jpg" alt="Secret Beach" onclick="openLightbox(this.src)">
+            <img src="images/talisay-beach.jpg" alt="Talisay Beach" onclick="openLightbox(this.src)">
+            <img src="images/star-beach.jpg" alt="Star Beach" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+        <!-- TOUR D -->
+        <div class="card">
+          <h3>Tour D</h3>
+          <p>Small Lagoon • Helicopter Island • Cadlao Lagoon • Pasandigan Beach • Paradise Beach</p>
+          <p><strong>Details:</strong> SWIMMING & SNORKLING. Ideal for families or groups. Enjoy lagoons, scenic islands, and calm beaches for a relaxing day tour.</p>
+          <p><strong>Price:</strong> Starts at ₱1,200 per person</p>
+
+          <div class="gallery">
+            <img src="images/small-lagoon.jpg" alt="Small Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/helicopter-island.jpg" alt="Helicopter Island" onclick="openLightbox(this.src)">
+            <img src="images/cadlao-lagoon.jpg" alt="Cadlao Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/pasandigan-beach.jpg" alt="Pasandigan Beach" onclick="openLightbox(this.src)">
+            <img src="images/paradise-beach.jpg" alt="Paradise Beach" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PRIVATE TOURS -->
+    <button class="category-toggle">Private Tours ▼</button>
+    <div class="category-content">
+      <div class="services">
+
+        <div class="card">
+          <h3>Private Island Hopping</h3>
+          <p>Big Lagoon • Secret Lagoon • Shimizu Island • Payong Payong</p>
+          <p><strong>Price:</strong> Starts at ₱10,000 </p>
+          <div class="gallery">
+            <img src="images/big-lagoon.jpg" alt="Big Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/secret-lagoon.jpg" alt="Secret Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/shimizu-island.jpg" alt="Shimizu Island" onclick="openLightbox(this.src)">
+            <img src="images/payong-payong-beach.jpg" alt="Payong Payong Island" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Private Adventure Tour</h3>
+          <p>Hidden Beach • Matinloc Shrine • Secret Beach • Star Beach</p>
+          <p><strong>Price:</strong> Starts at ₱10,000 </p>
+          <div class="gallery">
+            <img src="images/hidden-beach.jpg" alt="Hidden Beach" onclick="openLightbox(this.src)">
+            <img src="images/matinloc-shrine.jpg" alt="Matinloc Shrine" onclick="openLightbox(this.src)">
+            <img src="images/secret-beach.jpg" alt="Secret Beach" onclick="openLightbox(this.src)">
+            <img src="images/star-beach.jpg" alt="Star Beach" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Custom Private Tour</h3>
+          <p>Choose your own destinations & make it yours!</p>
+          <p><strong>Price:</strong> Start at ₱10,000 minimum for group</p>
+          <div class="gallery">
+            <img src="images/small-lagoon.jpg" alt="Small Lagoon" onclick="openLightbox(this.src)">
+            <img src="images/helicopter-island.jpg" alt="Helicopter Island" onclick="openLightbox(this.src)">
+            <img src="images/paradise-beach.jpg" alt="Paradise Beach" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<!-- VAN TRIP -->
+  <button class="category-toggle">Van Trip ▼</button>
+  <div class="category-content">
+    <div class="services">
+
+      <div class="card">
+        <h3>Puerto Princesa ⇄ El Nido Van Transfer</h3>
+        <p><strong>Route:</strong> Puerto Princesa to El Nido / El Nido to Puerto Princesa</p>
+        <p><strong>Travel Time:</strong> Approx. 5–6 hours</p>
+        <p><strong>Details:</strong> Comfortable, air-conditioned van transfer with pick-up and drop-off options.</p>
+      </div>
+
+    </div>
+  </div>
+
+ <!-- EXPEDITION TOURS -->
+<button class="category-toggle"> Boat Expeditions ▼</button>
+<div class="category-content">
+
+  <div class="services">
+
+    <div class="card">
+      <h3>Boat Expeditions: El Nido – Linapacan – Culion – Coron</h3>
+
+      <p>
+        Experience Northern Palawan through multi-day boat expeditions exploring
+        El Nido, Linapacan, Culion, and Coron. These island camping adventures range
+        from 2 days & 1 night up to 5 days & 4 nights.
+      </p>
+
+      <p>
+        Guests may join a scheduled group expedition or choose a private tour
+        customized to their preferred dates and travel style.
+      </p>
+
+      <p>
+        Public expeditions between El Nido and Coron usually operate from
+        <strong>September to June</strong>, with the 3 Days & 2 Nights tour being the
+        most popular option. Private expeditions are available all year round.
+      </p>
+
+      <p>
+        Activities include snorkeling in pristine reefs, visiting untouched beaches
+        and sandbars, spotting sea turtles, cliff jumping, and overnight island
+        camping with bonfires under the stars.
+      </p>
+
+      <p><strong>Duration:</strong> 2D1N up to 5D4N</p>
+      <p><strong>Tour Type:</strong> Public or Private</p>
+      <p><strong>Price:</strong> Upon request / Depends on group size</p>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- ADD THIS CSS -->
+<style>
+.category-toggle {
+  width: 100%;
+  background: #00bfa6;
+  color: white;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: left;
+  transition: 0.3s;
+}
+.category-toggle:hover {
+  background: #00796b;
+}
+.category-content {
+  display: none;
+  margin-bottom: 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #4e9c89;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  border-radius: 8px;
+}
+
+</style>
+
+<!-- ADD THIS JS -->
+<script>
+const toggles = document.querySelectorAll('.category-toggle');
+
+toggles.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const content = btn.nextElementSibling;
+    const isOpen = content.style.display === 'block';
+    content.style.display = isOpen ? 'none' : 'block';
+    btn.textContent = btn.textContent.replace(isOpen ? '▲' : '▼', isOpen ? '▼' : '▲');
+  });
+});
+</script>
+
+
+
+<section id="booking">
+  <h2>Book & Pay</h2>
+
+  <div class="booking-box">
+    <form id="booking-form">
+
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+
+      <!-- TOUR WITH PRICE VALUE -->
+      <select id="tour" required>
+        <option value="">Select Tour</option>
+        <option value="1200">Tour A – ₱1,200</option>
+        <option value="1300">Tour B – ₱1,300</option>
+        <option value="1400">Tour C – ₱1,400</option>
+        <option value="1200">Tour D – ₱1,200</option>
+        <option value="10000">Private Tour – ₱10,000</option>
+        <option value="700">Van Transfer – ₱700</option>
+      </select>
+
+      <!-- QUANTITY -->
+      <input type="number" id="quantity" min="1" value="1" required>
+
+      <!-- TOTAL -->
+      <div class="total">Total Payment: <span id="total-price">0</span></div>
+
+      <!-- PAYMENT METHOD -->
+      <select id="payment-method" required>
+        <option value="card">Credit/Debit Card</option>
+        <option value="gcash">GCash QR</option>
+        <option value="maya">Maya QR</option>
+      </select>
+
+      <!-- STRIPE CARD FIELD -->
+      <div id="card-element-container">
+        <div id="card-element" style="border:1px solid #ccc;padding:12px;border-radius:8px;margin-bottom:15px"></div>
+      </div>
+
+      <button type="submit">Confirm Booking</button>
+      <div id="payment-message" style="margin-top:15px;font-weight:600"></div>
+
+    </form>
+  </div>
+</section>
+
+<!-- TOUR REMINDERS BUTTON -->
+<button id="tour-reminder-btn" style="background:#00796b;color:white;padding:12px 20px;border:none;border-radius:8px;margin-bottom:20px;cursor:pointer;font-weight:bold;">
+  ⚠️ Tour Reminders
+</button>
+
+<!-- REMINDER MODAL -->
+<div id="tour-reminder-modal" style="
+  display:none;
+  position:fixed;
+  top:50px;
+  right:20px;
+  width:300px;
+  background:white;
+  border-left:5px solid #00796b;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  z-index:9999;
+  font-family:'Poppins', sans-serif;
+">
+  <span id="close-reminder" style="
+    position:absolute;
+    top:10px;
+    right:12px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:18px;
+  ">✖</span>
+  <h3 style="color:#00796b; margin-bottom:10px; font-size:1.2rem;">Important Tour Fees</h3>
+  <ul style="padding-left:20px; color:#333; font-size:0.95rem;">
+    <li><strong>Tour A:</strong> Additional ₱400 environmental fee + ₱200 Lagoon entrance fee</li>
+    <li><strong>Tour D:</strong> Additional ₱200 Lagoon entrance fee (no environmental fee for 2nd day)</li>
+  </ul>
+</div>
+
+<script>
+const reminderBtn = document.getElementById('tour-reminder-btn');
+const reminderModal = document.getElementById('tour-reminder-modal');
+const closeReminder = document.getElementById('close-reminder');
+
+reminderBtn.addEventListener('click', () => {
+  reminderModal.style.display = 'block';
+});
+
+closeReminder.addEventListener('click', () => {
+  reminderModal.style.display = 'none';
+});
+
+// Optional: click outside modal closes it
+window.addEventListener('click', (e) => {
+  if(e.target === reminderModal) {
+    reminderModal.style.display = 'none';
+  }
+});
+</script>
+
+
+<!-- STRIPE -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+
+const tour = document.getElementById('tour');
+const qty = document.getElementById('quantity');
+const total = document.getElementById('total-price');
+
+function updateTotal(){
+  const price = parseInt(tour.value) || 0;
+  const q = parseInt(qty.value) || 0;
+  total.textContent = (price * q).toLocaleString('en-PH');
+}
+
+tour.addEventListener('change', updateTotal);
+qty.addEventListener('input', updateTotal);
+
+// STRIPE SETUP
+const stripe = Stripe("YOUR_PUBLISHABLE_KEY");
+const elements = stripe.elements();
+const card = elements.create("card");
+card.mount("#card-element");
+
+const paymentMethodSelect = document.getElementById("payment-method");
+const cardContainer = document.getElementById("card-element-container");
+
+paymentMethodSelect.addEventListener("change", () => {
+  cardContainer.style.display = paymentMethodSelect.value === "card" ? "block" : "none";
+});
+
+// SUBMIT
+const form = document.getElementById("booking-form");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const amount = (parseInt(tour.value) || 0) * (parseInt(qty.value) || 0);
+  const method = paymentMethodSelect.value;
+
+  if(amount <= 0){
+    alert("Please select a valid tour.");
+    return;
+  }
+
+  if(method === "card"){
+
+    const res = await fetch("/create-payment-intent.php", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ amount })
+    });
+
+    const data = await res.json();
+
+    const result = await stripe.confirmCardPayment(data.clientSecret, {
+      payment_method:{
+        card: card,
+        billing_details:{ name, email }
+      }
+    });
+
+    if(result.error){
+      document.getElementById("payment-message").textContent = result.error.message;
+    } else {
+      document.getElementById("payment-message").textContent = "✅ Payment Successful!";
+    }
+
+  } else {
+
+    const res = await fetch("/generate-qr.php", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ amount, method })
+    });
+
+    const data = await res.json();
+
+    if(data.qr){
+      document.getElementById("payment-message").innerHTML = `Scan to pay:<br><img src="${data.qr}" width="200">`;
+    }
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
+
+<section id="contact" style="padding: 60px 20px; background: #f8f8f8; text-align: center;"> <h2 style="font-size: 2.4rem; color: #00796b; margin-bottom: 10px;">Get In Touch With Us</h2> <p style="margin-bottom: 30px; font-size: 1.1rem; color: #555;">Have questions, want to book a tour, or need trip advice? Send us a message — we’d love to help!</p> <div style="margin-bottom: 30px; font-size: 1rem; color: #333;"> 📍 <strong>El Nido Escape</strong><br> Masagana, El Nido, Palawan, PH<br><br> 📞 <a href="tel:+639536074822" style="color: #00796b; text-decoration: none;">+63 953 607 4822</a><br> 📞 <a href="tel:+639462278203" style="color: #00796b; text-decoration: none;">+63 946 227 8203</a><br> ✉️ <a href="mailto:elnidoescape@gmail.com" style="color: #00796b; text-decoration: none;">elnidoescape@gmail.com</a> </div>
+
+<div style="margin-bottom: 40px;"> <a href="https://wa.me/639536074822" target="_blank" style="background: #25D366; color: white; padding: 12px 25px; margin: 5px; text-decoration: none; border-radius: 25px; font-weight: bold;">💬 WhatsApp Us</a> <a href="mailto:elnidoescape@gmail.com" style="background: #00796b; color: white; padding: 12px 25px; margin: 5px; text-decoration: none; border-radius: 25px; font-weight: bold;">📧 Email Us</a> </div>
+
+<form style="max-width: 400px; margin: auto;" action="#" method="POST"> <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #aaa; border-radius: 5px;"> <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #aaa; border-radius: 5px;"> <textarea name="message" placeholder="Your Message" required style="width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #aaa; border-radius: 5px;"></textarea> <button type="submit" style="background: #00796b; color: white; padding: 12px 25px; border: none; border-radius: 5px; font-size: 1rem;">Send Message</button> </form> </section>
+
+<!-- FOOTER --> <footer> <p>© 2026 El Nido Escape</p> <p>Discover. Relax. Enjoy.</p> </footer>
+
+
+ </body> </html>
